@@ -9,8 +9,8 @@ use Class::Std::Utils;
 use List::MoreUtils qw(any);
 use Log::Log4perl qw(:easy);
 use Log::Log4perl::CommandLine qw(:all);
-use MyX::Generic;
-use UtilSY qw(:all);
+use MyX::Generic 0.0.3;
+use UtilSY 0.0.2 qw(:all);
 
 
 # set up the logging environment
@@ -72,7 +72,7 @@ my $logger = get_logger();
 		my ($self, $feature) = @_;
 		
 		# make sure the argument is defined
-		is_defined($feature, "feature");
+		check_defined($feature, "feature");
 		
 		return $data_href_of{ident $self}->{$feature};
 	}
@@ -98,8 +98,8 @@ my $logger = get_logger();
 		my ($self, $feature, $value) = @_;
 		
 		# check if the parameters are defined
-		is_defined($feature, "feature");
-		is_defined($value, "value");
+		check_defined($feature, "feature");
+		check_defined($value, "value");
 		
 		$data_href_of{ident $self}->{$feature} = $value;
 		
@@ -110,7 +110,7 @@ my $logger = get_logger();
 		my ($self, $href) = @_;
 		
 		# check if the parameter is defined
-		is_defined($href, "href");
+		check_defined($href, "href");
 		
 		$data_href_of{ident $self} = $href;
 		
@@ -123,7 +123,7 @@ my $logger = get_logger();
 	sub to_string {
 		my ($self, $delim) = @_;
 		
-		if ( ! defined $delim ) {
+		if ( ! is_defined($delim, "delim") ) {
 			$delim = ": ";
 		}
 		
@@ -200,7 +200,7 @@ List::MoreUtils qw(any)
 Log::Log4perl qw(:easy)
 Log::Log4perl::CommandLine qw(:all)
 MyX::Generic
-UtilSY qw(:all)
+UtilSY 0.0.2 qw(:all)
 
 
 =head1 INCOMPATIBILITIES
