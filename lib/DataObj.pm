@@ -121,13 +121,17 @@ my $logger = get_logger();
 	# Others #
 	##########
 	sub to_string {
-		my ($self) = @_;
+		my ($self, $delim) = @_;
+		
+		if ( ! defined $delim ) {
+			$delim = ": ";
+		}
 		
 		my $str = "";
 		my $href = $self->get_data_href();
 		
 		foreach my $feat ( keys %{$href} ) {
-			$str .= "$feat: " . $href->{$feat} . "\n";
+			$str .= $feat . $delim . $href->{$feat} . "\n";
 		}
 		
 		return $str;
@@ -285,6 +289,17 @@ None reported.
 	Args: -href => href with new features and their values
 	Throws: MyX::Generic::Undef::Param
 	Comments: NA
+	See Also: NA
+	
+=head2 to_string
+
+	Title: to_string
+	Usage: $obj->to_string($delimiter)
+	Function: Returns the obect data in a string
+	Returns: str
+	Args: -delimiter => string delimiter between the name and value
+	Throws: NA
+	Comments: The default delimiter is ": "
 	See Also: NA
 
 
